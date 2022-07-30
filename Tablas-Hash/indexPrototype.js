@@ -23,13 +23,15 @@ HashTable.prototype.get = function (key) {
     let address = this.hash(key)
     let currentBucket = this.data[address]
     if (currentBucket) {
-        for (let value in this.data) {
-            if (currentBucket[value][0]) {
+        for (let value in currentBucket) {
+            if (currentBucket[value][0] === key) {
                 return currentBucket[value][1]
             }
         }
+    }else{
+        return undefined
     }
-    return undefined
+    
 }
 
 const myTable = new HashTable(20)
@@ -40,7 +42,7 @@ myTable.set("Cami", 45228999)
 myTable.set("Tia Ana", 45228333)
 myTable.set("Ignacio", 4522222)
 console.log(myTable.get("Claudio"))
-console.log(myTable.get("Vale"))
+console.log(myTable.get("Ignacio"))
 
 
 
