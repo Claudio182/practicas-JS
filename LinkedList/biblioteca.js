@@ -16,7 +16,7 @@ LinkedList.prototype.endAdd = function (data) {
     
     if(!this.head) {
         this.head = nodo
-        this._length++
+        ++this._length
         return nodo
     }else{
         
@@ -24,6 +24,7 @@ LinkedList.prototype.endAdd = function (data) {
             current = current.next
         }
         current.next = nodo
+        ++this._length
         return nodo
     }
 }
@@ -32,7 +33,7 @@ LinkedList.prototype.startAdd = function(data) {
     let nodo = new Node(data)
     if(!this.head){
         this.head = nodo
-        this._length++
+        ++this._length
         return nodo
     }else {
         let temp = this.head
@@ -48,7 +49,7 @@ LinkedList.prototype.selectedAdd = function(data, postIn) {
 
     if(!this.head){
         this.head = nodo
-        this._length++
+        ++this._length
         console.log('El elemento se ha agregado como primer elemento ya que la lista se encontarba vacia')
     }else{
         while(current){
@@ -57,7 +58,7 @@ LinkedList.prototype.selectedAdd = function(data, postIn) {
                 let temp = current.next.next
                 current.next = nodo
                 nodo.next = temp
-                this._length++
+                ++this._length
                 return nodo
             }
         }
@@ -73,7 +74,7 @@ LinkedList.prototype.startDelete = function() {
         let firstEle = this.head.data
         let list = this.head.next
         this.head = list
-        this._length--
+        --this._length
         return firstEle
     }
 }
@@ -84,25 +85,25 @@ LinkedList.prototype.endDelete = function() {
         return
     }else{
         let current = this.head
-        while(current.next){
+        while(current.next.next){
             current = current.next
         }
-        let temp = current.data
+        let temp = current.next.data
         current.next = null
-        this._length--
+        --this._length
         return temp
     }
 }
 
 LinkedList.prototype.selectedDelete = function (data) {
     let current = this.head
-    let anterior
-    while(current){
-        anterior = current
-        if(current.data.toLowerCase() === data.toLowerCase()) {
-            let temp = current.data
-            anterior.next = current.next.next
-            this._length--
+    
+    while(current.next){
+        
+        if(current.next.data.toLowerCase() === data.toLowerCase()) {
+            let temp = current.next.data
+            current.next = current.next.next
+            --this._length
             return temp
         }
         current = current.next
@@ -114,17 +115,15 @@ let biblioteca = new LinkedList()
 biblioteca.endAdd('El Quijote')
 biblioteca.endAdd('La Odisea')
 biblioteca.endAdd('La Iliada')
-biblioteca.endAdd('La dvina comedia')
-biblioteca.endAdd('Hamlet')
-biblioteca.endAdd('La Eneida')
-biblioteca.endAdd('Cumbres borroscosas')
+// biblioteca.endAdd('Cumbres borroscosas')
 biblioteca.startAdd('Sin verguenza')
-biblioteca.startAdd('La casa del lago')
-biblioteca.selectedAdd('El psicoanalista', 'la odisea')
-console.log(biblioteca.startDelete())
-console.log(biblioteca.endDelete())
+// biblioteca.startAdd('La casa del lago')
+// biblioteca.selectedAdd('El psicoanalista', 'la odisea')
+// console.log(biblioteca.startDelete())
+// console.log(biblioteca.endDelete())
+console.log(biblioteca)
+// console.log(biblioteca.selectedDelete('el quijote'))
 console.log(biblioteca)
 
-console.log(biblioteca.selectedDelete('la odisea'))
 
-console.log(biblioteca)
+console.log(biblioteca._length)

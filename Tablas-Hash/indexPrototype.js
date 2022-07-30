@@ -4,8 +4,8 @@ function HashTable(size) {
 
 HashTable.prototype.hash = function (key) {
     let hash = 0
-    for (let value in this.key){
-        hash = (hash + key.charCodeAt(i) * i) % this.data.length
+    for (let value in key){
+        hash = (hash + key.charCodeAt(value)) % this.data.length
     }
     return hash
 }
@@ -32,7 +32,7 @@ HashTable.prototype.get = function (key) {
     return undefined
 }
 
-const myTable = new HashTable(50)
+const myTable = new HashTable(20)
 myTable.set("Claudio", 45228769)
 myTable.set("Sebastian", 45228955)
 myTable.set("Mama", 45228000)
@@ -41,6 +41,8 @@ myTable.set("Tia Ana", 45228333)
 myTable.set("Ignacio", 4522222)
 console.log(myTable.get("Claudio"))
 console.log(myTable.get("Vale"))
+
+
 
 console.log(myTable)
 console.log(myTable.data.length)
